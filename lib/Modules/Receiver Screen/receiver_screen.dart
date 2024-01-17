@@ -56,10 +56,16 @@ class ReceiverScreen extends StatelessWidget {
                   child: ListView.separated(
                     shrinkWrap: true,
                     itemCount: HomePageCubit.get(context).usersList.length,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 10,
-                      width: double.infinity,
-                    ),
+                    separatorBuilder: (context, index) {
+                      if (index == senderId)
+                      {
+                        return Container();
+                      }
+                      return const SizedBox(
+                        height: 10,
+                        width: double.infinity,
+                      );
+                    },
                     itemBuilder: (context, index) => ConditionalBuilder(
                       builder: (context) => buildUserItem(context, index),
                       condition: index != senderId,

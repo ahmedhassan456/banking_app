@@ -98,9 +98,9 @@ class HomePageCubit extends Cubit<HomePageStates> {
     emit(GetDataFromDatabaseLoadingState());
     await db.rawQuery('SELECT * FROM Users').then((value) {
       usersList = [];
-      value.forEach((element) {
+      for (var element in value) {
         usersList.add(UsersModel.fromJson(element));
-      });
+      }
       log(usersList[0].currentBalance.toString());
       emit(GetDataFromUsersTableSuccessState());
     }).catchError((error) {
@@ -110,9 +110,9 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
     await db.rawQuery('SELECT * FROM Transfers').then((value) {
       transformsList = [];
-      value.forEach((element) {
+      for (var element in value) {
         transformsList.add(TransfersModel.fromJson(element));
-      });
+      }
       log(transformsList[0].timestamp.toString());
       emit(GetDataFromTransfersTableSuccessState());
     }).catchError((error) {
